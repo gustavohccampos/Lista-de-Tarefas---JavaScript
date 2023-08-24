@@ -1,34 +1,36 @@
+import BotaoConclui from './assets/componentes/concluiTarefa.js'
+import BotaoDeleta from './assets/componentes/deletaTarefa.js'
 
-import BotaoConclui from "./assets/componentes/concluiTarefa.js" ;
-import BotaoDeleta from "./assets/componentes/deletaTarefa.js";
+const criarTarefa = evento => {
+  evento.preventDefault()
 
-  const criarTarefa = (evento) => {
-    evento.preventDefault();
+  const input = document.querySelector('[data-form-input]')
 
-    const input = document.querySelector('[data-form-input]');
-    const valor = input.value;
-    const lista = document.querySelector('[data-list]');
+  if (input.value === '') {
+    swal('Digite o nome da Tarefa!')
+  } else {
+    const lista = document.querySelector('[data-list]')
 
-    const tarefa = document.createElement('li');
-    tarefa.classList.add('task');
-    
-    const conteudo = `<p class='content'>${valor.toUpperCase()}</p>`;
+    const tarefa = document.createElement('li')
+    tarefa.classList.add('task')
 
-    tarefa.innerHTML = conteudo;
-    
-    tarefa.appendChild(BotaoConclui());
-    tarefa.appendChild(BotaoDeleta());
-    lista.appendChild(tarefa);
-    input.value = " ";
+    const conteudo = `<p class='content'>${input.value.toUpperCase()}</p>`
+
+    tarefa.innerHTML = conteudo
+
+    tarefa.appendChild(BotaoConclui())
+
+    tarefa.appendChild(BotaoDeleta())
+
+    lista.appendChild(tarefa)
+    input.value = ''
   }
+}
 
-  const novaTarefa = document.querySelector('[data-form-button]');
-  novaTarefa.addEventListener('click', criarTarefa)
+const novaTarefa = document.querySelector('[data-form-button]')
+novaTarefa.addEventListener('click', criarTarefa)
 
-
-
-
-  /*
+/*
   Utilizamos o método querySelector para percorrer a árvore do DOM e encontrar o elemento que queremos utilizando JavaScript. Porém existem outros métodos que podem ser utilizados para o mesmo fim.
   
   document.getElementById(‘id’) seleciona o elemento pelo id passado.
